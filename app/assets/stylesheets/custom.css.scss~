@@ -149,12 +149,14 @@ aside {
   }
 }
 
-
-.gravatar {
-  float: left;
-  margin-right: 10px;
+.user-avatars{
+	overflow: auto;
+	margin-top: 10px;
+	.gravatar {
+  		float: left;
+  		margin-right: 10px;
+	}
 }
-
 /* forms */
 
 input, textarea, select, .uneditable-input {
@@ -184,7 +186,7 @@ input, textarea, select, .uneditable-input {
 	color: #555555;
 	position: relative;
 	left: 150px;
-	bottom: 50px
+	bottom: 50px;
 }
 /* users index */
 
