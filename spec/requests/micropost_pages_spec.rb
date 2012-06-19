@@ -42,4 +42,17 @@ describe "Micropost pages" do
       	end
     	end
   	end
+
+	describe "delete link shouldn't apppear for orther users" do
+		let(:user2) { FactoryGirl.create(:user, email: "user2@kakaka.com") }
+		before { sign_in user2 }
+
+		before { FactoryGirl.create(:micropost, user: user) }
+		before { FactoryGirl.create(:micropost, user: user2) }
+
+		describe "hack another user's post for delete" do
+			before { visit user_path(user) }
+			it { should_not have_link "delete" }
+		end
+	end
 end
