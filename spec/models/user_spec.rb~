@@ -22,12 +22,12 @@ describe User do
 
   	subject { @user }
 
-  	it { should respond_to(:name) }
-  	it { should respond_to(:email) }
-	it { should be_valid }
-	it { should respond_to(:password_digest) }
-	it { should respond_to(:password) }
-	it { should respond_to(:password_confirmation) }
+  	#it { should respond_to(:name) }
+  	#it { should respond_to(:email) }
+	#it { should be_valid }
+	#it { should respond_to(:password_digest) }
+	#it { should respond_to(:password) }
+	#it { should respond_to(:password_confirmation) }
 	#it { should respond_to(:remember_token) }
 	#it { should respond_to(:authenticate) }
 	it { should respond_to(:name, :email, :password_digest, :password, :password_confirmation, :remember_token, :authenticate, :admin, :authenticate, :microposts, :feed, :relationships, :followed_users, :followers ) }
@@ -160,6 +160,11 @@ describe User do
 			let(:unfollowed_post) do
 				FactoryGirl.create(:micropost, user: FactoryGirl.create(:user))
 			end
+			let(:followed_user) { FactoryGirl.create(:user) }
+
+			before do
+				@user.follow!(followed_user)
+				3.times { followed_user.microposts.create!(content: "Lorem ipsum") }
 
 			its(:feed) { should include(newer_micropost) }
 			its(:feed) { should include(older_micropost) }
@@ -186,7 +191,7 @@ describe User do
 
 		describe "followed user" do
 			subject { other_user }
-			its(:follwers) { should include(@user) }
+			its(:followers) { should include(@user) }
 		end
 	end
 end
